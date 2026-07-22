@@ -438,6 +438,19 @@ function EmergencyRequest() {
   const [sent, setSent] = useState(false);
   const [loading, setLoading] = useState(false);
   const [notifiedStats, setNotifiedStats] = useState({ bloodBanks: 0, donors: 0 });
+  const [nearbyBanks, setNearbyBanks] = useState([]);
+
+  useEffect(() => {
+    const fetchBanks = async () => {
+      try {
+        const res = await api.get('/patient/search');
+        setNearbyBanks(res.data.results || []);
+      } catch (err) {
+        console.error('Failed to load nearby banks:', err);
+      }
+    };
+    fetchBanks();
+  }, []);
 
   const handleSOS = async (e) => {
     e.preventDefault();
