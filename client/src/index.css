@@ -171,7 +171,7 @@ body {
 
   /* Table styles */
   .data-table {
-    @apply w-full text-sm text-left;
+    @apply w-full text-sm text-left block overflow-x-auto whitespace-nowrap;
   }
 
   .data-table th {
