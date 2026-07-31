@@ -98,8 +98,8 @@ export default function Navbar() {
 
             {/* Right Actions */}
             <div className="flex items-center gap-2">
-              {/* Language Switcher */}
-              <div className="relative">
+              {/* Language Switcher - Hidden on mobile, available in mobile drawer */}
+              <div className="relative hidden sm:block">
                 <button
                   onClick={() => setLangOpen(!langOpen)}
                   className={`flex items-center gap-1 p-2 rounded-lg transition-colors ${scrolled ? 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800' : 'text-gray-700 dark:text-white/80 hover:text-primary-600 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/10'
@@ -128,10 +128,10 @@ export default function Navbar() {
                 )}
               </div>
 
-              {/* Theme Toggle */}
+              {/* Theme Toggle - Hidden on mobile, available in mobile drawer */}
               <button
                 onClick={toggleTheme}
-                className={`p-2 rounded-lg transition-all duration-300 ${scrolled ? 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800' : 'text-gray-700 dark:text-white/80 hover:text-primary-600 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/10'
+                className={`hidden sm:flex p-2 rounded-lg transition-all duration-300 ${scrolled ? 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800' : 'text-gray-700 dark:text-white/80 hover:text-primary-600 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/10'
                   }`}
                 aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
               >
