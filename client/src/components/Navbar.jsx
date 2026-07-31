@@ -209,16 +209,17 @@ export default function Navbar() {
                 </div>
               )}
 
-              {/* Mobile Menu Toggle */}
-              <button
-                onClick={() => setMobileOpen(!mobileOpen)}
-                className={`lg:hidden p-2 rounded-lg ${scrolled ? 'text-gray-600 dark:text-gray-400' : 'text-gray-800 dark:text-white'
-                  }`}
-                aria-label="Toggle mobile menu"
-                aria-expanded={mobileOpen}
-              >
-                {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-              </button>
+              {/* Mobile Menu Toggle - always shows Menu icon, X is only inside drawer */}
+              {!mobileOpen && (
+                <button
+                  onClick={() => setMobileOpen(true)}
+                  className={`lg:hidden p-2 rounded-lg ${scrolled ? 'text-gray-600 dark:text-gray-400' : 'text-gray-800 dark:text-white'
+                    }`}
+                  aria-label="Open mobile menu"
+                >
+                  <Menu className="w-6 h-6" />
+                </button>
+              )}
             </div>
           </div>
         </div>
