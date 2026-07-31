@@ -227,9 +227,9 @@ export default function Navbar() {
 
       {/* Mobile Drawer */}
       {mobileOpen && (
-        <div className="fixed inset-0 z-40 lg:hidden">
-          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setMobileOpen(false)} />
-          <div className="absolute top-0 right-0 h-full w-80 bg-white dark:bg-gray-950 shadow-2xl flex flex-col">
+        <div className="fixed inset-0 z-50 lg:hidden">
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setMobileOpen(false)} />
+          <div className="absolute top-0 right-0 h-full w-80 max-w-[85vw] bg-white dark:bg-gray-950 shadow-2xl flex flex-col z-50">
             <div className="flex items-center justify-between p-5 border-b border-gray-100 dark:border-gray-800">
               <div className="flex items-center gap-2">
                 <Droplets className="w-6 h-6 text-primary-600" />
