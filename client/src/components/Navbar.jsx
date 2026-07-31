@@ -98,8 +98,8 @@ export default function Navbar() {
 
             {/* Right Actions */}
             <div className="flex items-center gap-2">
-              {/* Language Switcher - Hidden on mobile, available in mobile drawer */}
-              <div className="relative hidden sm:block">
+              {/* Language Switcher */}
+              <div className="relative">
                 <button
                   onClick={() => setLangOpen(!langOpen)}
                   className={`flex items-center gap-1 p-2 rounded-lg transition-colors ${scrolled ? 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800' : 'text-gray-700 dark:text-white/80 hover:text-primary-600 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/10'
@@ -107,17 +107,17 @@ export default function Navbar() {
                   aria-label="Change language"
                   aria-expanded={langOpen}
                 >
-                  <Globe className="w-5 h-5" />
-                  <span className="hidden sm:block text-xs font-medium">{LANGUAGES.find(l => l.code === language)?.label}</span>
+                  <Globe className="w-5 h-5 text-primary-600 dark:text-primary-400" />
+                  <span className="text-xs font-semibold uppercase tracking-wider text-gray-700 dark:text-gray-200">{language}</span>
                   <ChevronDown className={`w-3 h-3 transition-transform ${langOpen ? 'rotate-180' : ''}`} />
                 </button>
                 {langOpen && (
-                  <div className="absolute right-0 top-full mt-2 w-40 bg-white dark:bg-gray-900 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden z-50">
+                  <div className="absolute right-0 top-full mt-2 w-44 bg-white dark:bg-gray-900 rounded-xl shadow-xl border border-gray-200 dark:border-gray-700 overflow-hidden z-50">
                     {LANGUAGES.map((lang) => (
                       <button
                         key={lang.code}
                         onClick={() => { setLanguage(lang.code); setLangOpen(false); }}
-                        className={`w-full flex items-center gap-3 px-4 py-3 text-sm hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors ${language === lang.code ? 'text-primary-600 bg-primary-50 dark:bg-primary-950' : 'text-gray-700 dark:text-gray-300'
+                        className={`w-full flex items-center gap-3 px-4 py-3 text-sm font-medium hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors ${language === lang.code ? 'text-primary-600 bg-primary-50 dark:bg-primary-950/50 font-bold' : 'text-gray-700 dark:text-gray-300'
                           }`}
                       >
                         <span>{lang.flag}</span>
@@ -128,14 +128,15 @@ export default function Navbar() {
                 )}
               </div>
 
-              {/* Theme Toggle - Hidden on mobile, available in mobile drawer */}
+              {/* Theme Toggle (Light / Dark mode) */}
               <button
                 onClick={toggleTheme}
-                className={`hidden sm:flex p-2 rounded-lg transition-all duration-300 ${scrolled ? 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800' : 'text-gray-700 dark:text-white/80 hover:text-primary-600 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/10'
+                className={`p-2 rounded-lg transition-all duration-300 ${scrolled ? 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800' : 'text-gray-700 dark:text-white/80 hover:text-primary-600 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-white/10'
                   }`}
                 aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+                title={`Switch to ${theme === 'light' ? 'Dark' : 'Light'} Mode`}
               >
-                {theme === 'light' ? <Moon className="w-5 h-5" /> : <Sun className="w-5 h-5" />}
+                {theme === 'light' ? <Moon className="w-5 h-5 text-purple-600" /> : <Sun className="w-5 h-5 text-amber-400" />}
               </button>
 
               {isAuthenticated ? (
@@ -252,6 +253,42 @@ export default function Navbar() {
                 </Link>
               ))}
             </div>
+
+            {/* Language & Theme selector inside Drawer */}
+            <div className="px-5 py-3 border-t border-gray-100 dark:border-gray-800 space-y-3">
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Settings</p>
+              <div className="flex items-center justify-between">
+                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Theme</span>
+                <button
+                  onClick={toggleTheme}
+                  className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 text-xs font-semibold"
+                >
+                  {theme === 'light' ? <Moon className="w-4 h-4 text-purple-600" /> : <Sun className="w-4 h-4 text-amber-400" />}
+                  <span>{theme === 'light' ? 'Dark Mode' : 'Light Mode'}</span>
+                </button>
+              </div>
+
+              <div>
+                <p className="text-xs font-medium text-gray-700 dark:text-gray-300 mb-2">Language</p>
+                <div className="grid grid-cols-3 gap-2">
+                  {LANGUAGES.map((lang) => (
+                    <button
+                      key={lang.code}
+                      onClick={() => setLanguage(lang.code)}
+                      className={`px-2 py-2 rounded-xl text-xs font-medium border flex items-center justify-center gap-1 transition-all ${
+                        language === lang.code
+                          ? 'bg-primary-600 text-white border-primary-600 shadow-sm'
+                          : 'bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800 text-gray-700 dark:text-gray-300'
+                      }`}
+                    >
+                      <span>{lang.flag}</span>
+                      <span>{lang.label}</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
             <div className="p-5 border-t border-gray-100 dark:border-gray-800 space-y-3">
               {isAuthenticated ? (
                 <>
