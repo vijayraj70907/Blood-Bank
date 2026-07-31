@@ -44,13 +44,29 @@ export function LoginPage() {
     }
   };
 
+  const MOCK_DEMO_USERS = {
+    'admin@bloodbridge.in': { name: 'Blood Bank Admin', email: 'admin@bloodbridge.in', role: 'admin', _id: 'demo-admin-id' },
+    'donor@bloodbridge.in': { name: 'John Donor', email: 'donor@bloodbridge.in', role: 'donor', _id: 'demo-donor-id' },
+    'patient@bloodbridge.in': { name: 'Jane Patient', email: 'patient@bloodbridge.in', role: 'patient', _id: 'demo-patient-id' },
+    'super@bloodbridge.in': { name: 'Super Admin', email: 'super@bloodbridge.in', role: 'superadmin', _id: 'demo-super-id' },
+  };
+
   const handleDemoLogin = async (demo) => {
     setDemoLoading(demo.email);
     try {
       await doLogin(demo.email, demo.password);
     } catch (err) {
-      const msg = err.response?.data?.error || 'Demo login failed. Please restart the server.';
-      toast.error(msg);
+      // Offline / Vercel fallback for demo accounts if server API call fails
+      const mockUser = MOCK_DEMO_USERS[demo.email];
+      if (mockUser) {
+        login(mockUser, 'mock-demo-token-12345');
+        toast.success(`Welcome back, ${mockUser.name}! (Demo Mode) 🎉`);
+        const paths = { admin: '/admin', donor: '/donor', patient: '/patient', superadmin: '/superadmin' };
+        navigate(paths[mockUser.role] || '/');
+      } else {
+        const msg = err.response?.data?.error || 'Demo login failed. Please try again.';
+        toast.error(msg);
+      }
     } finally {
       setDemoLoading(null);
     }
