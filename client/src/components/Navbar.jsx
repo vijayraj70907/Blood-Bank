@@ -275,11 +275,10 @@ export default function Navbar() {
                     <button
                       key={lang.code}
                       onClick={() => setLanguage(lang.code)}
-                      className={`px-2 py-2 rounded-xl text-xs font-medium border flex items-center justify-center gap-1 transition-all ${
-                        language === lang.code
+                      className={`px-2 py-2 rounded-xl text-xs font-medium border flex items-center justify-center gap-1 transition-all ${language === lang.code
                           ? 'bg-primary-600 text-white border-primary-600 shadow-sm'
                           : 'bg-gray-50 dark:bg-gray-900 border-gray-200 dark:border-gray-800 text-gray-700 dark:text-gray-300'
-                      }`}
+                        }`}
                     >
                       <span>{lang.flag}</span>
                       <span>{lang.label}</span>
