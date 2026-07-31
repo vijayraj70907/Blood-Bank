@@ -15,7 +15,7 @@ export default function DashboardLayout() {
       <Sidebar mobileOpen={mobileOpen} onClose={() => setMobileOpen(false)} />
 
       {/* Main Content */}
-      <div className="flex-1 lg:ml-64 flex flex-col min-h-screen transition-all duration-300 min-w-0">
+      <div className="flex-1 lg:ml-64 flex flex-col h-screen transition-all duration-300 min-w-0">
         {/* Top Bar */}
         <header className="sticky top-0 z-30 bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800 px-4 sm:px-6 h-16 flex items-center gap-4 shadow-sm">
           <button
@@ -60,7 +60,7 @@ export default function DashboardLayout() {
         </header>
 
         {/* Page Content */}
-        <main id="main-content" className="flex-1 p-4 sm:p-6 lg:p-8 overflow-x-auto overflow-y-hidden">
+        <main id="main-content" className="flex-1 p-4 sm:p-6 lg:p-8 overflow-x-hidden overflow-y-auto min-h-0">
           <Outlet />
         </main>
       </div>

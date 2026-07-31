@@ -88,8 +88,8 @@ export default function Sidebar({ mobileOpen, onClose }) {
 
       <aside
         className={`
-          fixed top-0 left-0 h-full bg-white dark:bg-gray-950 border-r border-gray-200 dark:border-gray-800
-          flex flex-col z-50 transition-all duration-300 shadow-2xl
+          fixed top-0 left-0 h-screen bg-white dark:bg-gray-950 border-r border-gray-200 dark:border-gray-800
+          flex flex-col z-50 transition-all duration-300 shadow-2xl overflow-hidden
           ${collapsed ? 'w-20' : 'w-64'}
           ${mobileOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
         `}
@@ -146,7 +146,7 @@ export default function Sidebar({ mobileOpen, onClose }) {
         )}
 
         {/* Navigation */}
-        <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-1">
+        <nav className="flex-1 overflow-y-auto overscroll-contain px-3 py-4 space-y-1 scrollbar-thin">
           {menus.map((item) => (
             <NavLink
               key={item.path}
@@ -161,10 +161,10 @@ export default function Sidebar({ mobileOpen, onClose }) {
                   : 'text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-900 hover:text-gray-900 dark:hover:text-white'
                 }
               `}
-              title={collapsed ? item.label : undefined}
+              title={item.label}
             >
               <item.icon className="w-5 h-5 flex-shrink-0" />
-              {!collapsed && <span>{item.label}</span>}
+              {!collapsed && <span className="truncate">{item.label}</span>}
             </NavLink>
           ))}
         </nav>
